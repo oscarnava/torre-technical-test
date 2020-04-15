@@ -1,9 +1,10 @@
 import request from './mockAPI';
 import Globals from '../globals';
 
-const { SERVICE_URL } = Globals;
+const { RECS_SERVICE_URL, INFO_SERVICE_URL } = Globals;
 
-const requestPage = (user, page) => request(`${SERVICE_URL}/${user}/recommendations?page=${page}`, { getGiven: false, getReceived: true });
+const requestRecommendations = (user, page) => request(`${RECS_SERVICE_URL}/${user}/recommendations?page=${page}`, { getGiven: false, getReceived: true });
+const requestUserInfo = (user) => request(`${INFO_SERVICE_URL}/${user}`);
 
 const acumRecs = ({ total, elements }, acum = { total: 0, count: 0, stats: {} }) => {
   if (elements && elements[0] && elements[0].connections) {
@@ -19,10 +20,11 @@ const acumRecs = ({ total, elements }, acum = { total: 0, count: 0, stats: {} })
   return acum;
 };
 
-const fetchUserInfo = async (user) => {
-  const info = acumRecs(await requestPage(user, 0));
-  //TODO: Currently the API only returns the first 20 recommendations; should fetch all, but time is scarce.
-  return info;
-};
+//TODO: Currently the API only returns the first 20 recommendations; should fetch all, but time is scarce.
+const fetchUserRecs = async (user) => acumRecs(await requestRecommendations(user, 0));
+const fetchUserInfo = async (user) => requestUserInfo(user);
 
-export default fetchUserInfo;
+export {
+  fetchUserRecs,
+  fetchUserInfo,
+};
