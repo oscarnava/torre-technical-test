@@ -6,9 +6,6 @@ export default class App extends React.Component {
     console.log('componentDidMount');
 
     const info = fetchUserInfo('ana-maria-diaz');
-    info.then((json) => {
-      console.log(json);
-    });
   }
 
   render() {
