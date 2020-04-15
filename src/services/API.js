@@ -2,9 +2,9 @@ const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
 
 const URL = (url = '', useProxy = true) => `${useProxy ? PROXY_URL : ''}${url}`;
 
-const request = (url, body) => {
+const request = (url, body, method = 'POST') => {
   const opts = {
-    method: 'POST',
+    method,
     body: body && JSON.stringify(body),
     headers: {
       'Content-Type': 'application/json',

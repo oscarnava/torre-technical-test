@@ -4,7 +4,7 @@ import Globals from '../globals';
 const { RECS_SERVICE_URL, INFO_SERVICE_URL } = Globals;
 
 const requestRecommendations = (user, page) => request(`${RECS_SERVICE_URL}/${user}/recommendations?page=${page}`, { getGiven: false, getReceived: true });
-const requestUserInfo = (user) => request(`${INFO_SERVICE_URL}/${user}`);
+const requestUserInfo = (user) => request(`${INFO_SERVICE_URL}/${user}`, null, 'GET');
 
 const acumRecs = ({ total, elements }, acum = { total: 0, count: 0, stats: {} }) => {
   if (elements && elements[0] && elements[0].connections) {
