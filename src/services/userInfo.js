@@ -1,4 +1,4 @@
-import request from './mockAPI';
+import request from './request';
 import Globals from '../globals';
 
 const { RECS_SERVICE_URL, INFO_SERVICE_URL } = Globals;

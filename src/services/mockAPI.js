@@ -6,7 +6,7 @@ const MOCK_DATA = {
   'https://torre.bio/api/bios/ana-maria-diaz': [MOCK_USER_INFO],
 };
 
-const request = (url) => {
+const mockRequest = (url) => {
   const pageInfo = url.match(/(.*)\?page=(\d)/);
   const key = pageInfo ? pageInfo[1] : url;
   const page = pageInfo ? +pageInfo[2] : 0;
@@ -14,4 +14,4 @@ const request = (url) => {
   return Promise.resolve((MOCK_DATA[key] && MOCK_DATA[key][page]) || null);
 };
 
-export default request;
+export default mockRequest;
