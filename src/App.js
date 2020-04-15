@@ -3,9 +3,9 @@ import fetchUserInfo from './services/userInfo';
 
 export default class App extends React.Component {
   componentDidMount() {
-    console.log('componentDidMount');
-
-    const info = fetchUserInfo('ana-maria-diaz');
+    fetchUserInfo('ana-maria-diaz').then((info) => {
+      console.log('componentDidMount', info);
+    });
   }
 
   render() {

@@ -5,18 +5,24 @@ const { SERVICE_URL } = Globals;
 
 const requestPage = (user, page) => request(`${SERVICE_URL}/${user}/recommendations?page=${page}`, { getGiven: false, getReceived: true });
 
-const acumRecs = (data, acum = {}) => {
-  const recommendations = data.elements[0].connections.map((itm) => {
-    const { weight, strengths } = itm.recommendation;
-    return { source: itm.personSourceId, weight, strengths };
-  });
-  return recommendations;
+const acumRecs = ({ total, elements }, acum = { total: 0, count: 0, stats: {} }) => {
+  if (elements && elements[0] && elements[0].connections) {
+    acum.total = total;
+    return elements[0].connections.reduce((acc, itm) => {
+      acum.count += 1;
+      const { weight, strengths } = itm.recommendation;
+      // console.log({ source: itm.personSourceId, weight, strengths });
+      strengths.forEach((strg) => { acc.stats[strg] = (acc.stats[strg] || 0) + weight; });
+      return acc;
+    }, acum);
+  }
+  return acum;
 };
 
 const fetchUserInfo = async (user) => {
-  const data = await requestPage(user, 0);
-  console.log(data);
-  console.log(acumRecs(data));
+  const info = acumRecs(await requestPage(user, 0));
+  //TODO: Currently the API only returns the first 20 recommendations; should fetch all, but time is scarce.
+  return info;
 };
 
 export default fetchUserInfo;
