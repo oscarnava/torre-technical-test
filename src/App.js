@@ -16,46 +16,37 @@ export default class App extends React.Component {
       chartData: null,
       person: null,
     };
+    this.inputReference = React.createRef();
   }
 
   componentDidMount() {
     const { user } = this.state;
+    this.fetchUser(user);
+  }
 
-    fetchUserInfo(user).then(({ person }) => {
-      console.log({ person });
-      this.setState({ person });
-
-      fetchUserRecs(user).then(({ stats }) => {
-        console.log('componentDidMount', stats);
-
-        const data = [];
-        const labels = [];
-        const keys = Object.keys(stats).sort((a, b) => stats[b] - stats[a]);
-
-        keys.forEach((key) => {
-          labels.push(key);
-          data.push(Math.round(stats[key]));
-        });
-
-        this.setState({
-          chartData: {
-            datasets: [{
-              data,
-              backgroundColor: generateColor,
-            }],
-            labels,
-          },
-        });
-      });
-    });
+  onFetch = (e) => {
+    e.preventDefault();
+    const { value } = this.inputReference.current;
+    console.log({ value });
+    this.setState({ user: value, chartData: null });
+    this.fetchUser(value);
   }
 
   get contents() {
-    const { chartData, person } = this.state;
+    const { chartData, person, user } = this.state;
     if (chartData) {
       const { name, picture } = person || { name: '', picture: '' };
       return (
         <div className="recommendations-container">
+          <div className="user-input-container">
+            <form>
+              <label htmlFor="public-id">
+                User public id:
+                <input id="public-id" type="text" defaultValue={user} ref={this.inputReference} />
+              </label>
+              <button type="submit" onClick={this.onFetch.bind(this)}>Fetch</button>
+            </form>
+          </div>
           <div className="user-container">
             <img src={picture} alt={name} />
             <h1>{name}</h1>
@@ -75,6 +66,40 @@ export default class App extends React.Component {
     return (
       <div className="loading-msg">Loading data...</div>
     );
+  }
+
+  fetchUser(user) {
+    fetchUserInfo(user).then(({ person }) => {
+      console.log({ person });
+      this.fetchRecs(person);
+    });
+  }
+
+  fetchRecs(person) {
+    const { publicId } = person;
+    fetchUserRecs(publicId).then(({ stats }) => {
+      console.log('componentDidMount', stats);
+
+      const data = [];
+      const labels = [];
+      const keys = Object.keys(stats).sort((a, b) => stats[b] - stats[a]);
+
+      keys.forEach((key) => {
+        labels.push(key);
+        data.push(Math.round(stats[key]));
+      });
+
+      this.setState({
+        person,
+        chartData: {
+          datasets: [{
+            data,
+            backgroundColor: generateColor,
+          }],
+          labels,
+        },
+      });
+    });
   }
 
   render() {
