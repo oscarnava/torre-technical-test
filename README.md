@@ -61,7 +61,7 @@ For this issue, and to reduce requests to the server during development (and spe
 ## 📦 Contributing
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/oscarnava/events-page/issues).
+Feel free to check the [issues page](https://github.com/oscarnava/torre-technical-test/issues).
 
 ## 📡 Contact
 
