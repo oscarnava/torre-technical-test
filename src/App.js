@@ -1,7 +1,7 @@
 import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
 import { fetchUserRecs, fetchUserInfo } from './services/userInfo';
 import InputForm from './components/inputForm';
+import GraphContainer from './containers/graphContainer';
 import './styles/app.sass';
 import Globals from './globals';
 
@@ -43,15 +43,7 @@ export default class App extends React.Component {
             <img src={picture} alt={name} />
             <h1>{name}</h1>
           </div>
-          <div className="graph-container">
-            <h2>Accumulated recommendations by weight</h2>
-            <p>
-              This graph shows the user&apos;s strengths in a graph weighted by who did the recommendation,
-              and the weight of the person&apos;s recommendation. This way we can have a quick image of the
-              best-recommended strengths of the user considering the total weight of them.
-            </p>
-            <Doughnut data={chartData} options={{ maintainAspectRatio: false }} />
-          </div>
+          <GraphContainer chartData={chartData} />
         </div>
       );
     }
