@@ -16,7 +16,6 @@ export default class App extends React.Component {
       chartData: null,
       person: null,
     };
-    this.inputReference = React.createRef();
   }
 
   componentDidMount() {
@@ -24,11 +23,9 @@ export default class App extends React.Component {
     this.fetchUser(user);
   }
 
-  onFetch = (e) => {
-    e.preventDefault();
-    const { value } = this.inputReference.current;
-    this.setState({ user: value, chartData: null });
-    this.fetchUser(value);
+  onFetch = (user) => {
+    this.setState({ user, chartData: null });
+    this.fetchUser(user);
   }
 
   get contents() {
@@ -38,7 +35,7 @@ export default class App extends React.Component {
       const { name, picture } = person || { name: '', picture: '' };
       return (
         <div className="recommendations-container">
-          <InputForm user={user} inputReference={this.inputReference} onFetch={this.onFetch} />
+          <InputForm user={user} onFetch={this.onFetch} />
           <div className="user-container">
             <img src={picture} alt={name} />
             <h1>{name}</h1>
@@ -51,7 +48,7 @@ export default class App extends React.Component {
     if (person === '?') {
       return (
         <div className="recommendations-container">
-          <InputForm user={user} inputReference={this.inputReference} onFetch={this.onFetch} />
+          <InputForm user={user} onFetch={this.onFetch} />
           <div className="user-container">
             <h1>{`User ${user} not found!`}</h1>
           </div>
