@@ -28,6 +28,8 @@ Each recommendation has a different weight, depending on who recommends, and abo
 
 So I thought that it would be a good addition to summarize all those weighted recommendations in one simple graph that will show, based on recommendations, which are the best strengths of the user.
 
+Please check also the ___Todo's___ section below for more details.
+
 ## Deliverables
 - [Live site](https://oscarnava.me/torre/) (Alternatively [this link](https://oscarnava.me/torre/?mode=mock) uses mock data; limited to one user: ___ana-maria-diaz___).
 - To view progress log, [click here](https://raw.githack.com/oscarnava/torre-technical-test/develop/docs/clockify-2020-04-16.html)
@@ -37,3 +39,30 @@ So I thought that it would be a good addition to summarize all those weighted re
 To fetch the user recommendations I had to reverse engineer that section at ___bio.torre.co___ website. Since I assume this API is not intended for public use, I had to use a proxy to bypass the CORS issue. This, in turn, slows down fetching the data from the server, or at times it won't fetch the data at all.
 
 For this issue, and to reduce requests to the server during development (and speed up things) I created a mock request. To use the mock request, just pass the parameter ___mode=mock___ in the URL.
+
+## 🧰 Built with:
+- React / JavaScript
+- SASS / CSS
+- ☕☕☕ Coffee
+
+## 👀 Live demo
+- [Live site](https://oscarnava.me/torre/)
+
+## 👤 Author
+  ### *Oscar Nava Trujillo*
+  - email: [contact@oscarnava.me](mailto:contact@oscarnava.me)
+  - Github: [@oscarnava]( https://github.com/oscarnava )
+  - Linkedin: [Oscar Nava Trujillo](https://www.linkedin.com/in/oscar-nava-trujillo-15847a14a/)
+
+## ⌛ To-do's
+- [ ] The app fits in small screens, but I didn't put too much time on the responsive aspect, since this is just a _proof of concept_.
+- [ ] Since the recommendation API only sends back the recommendations in segments of 20, and in the spirit of _KISS_, I had to limit the result to 20 recommendations, but the ideal would be to being able to fetch the whole list in one go, because making several requests can be very costly.
+
+## 📦 Contributing
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/oscarnava/events-page/issues).
+
+## 📡 Contact
+
+Please don't hesitate to contact me at 📧 [contact@oscarnava.me](mailto:contact@oscarnava.me) if you have any questions, comments, etc. I would love to know what's on your mind!
