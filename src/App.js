@@ -2,6 +2,7 @@ import React from 'react';
 import { fetchUserRecs, fetchUserInfo } from './services/userInfo';
 import InputForm from './components/inputForm';
 import GraphContainer from './containers/graphContainer';
+import UserContainer from './containers/userContainer';
 import './styles/app.sass';
 import Globals from './globals';
 
@@ -32,14 +33,11 @@ export default class App extends React.Component {
     const { chartData, person, user } = this.state;
 
     if (chartData) {
-      const { name, picture } = person || { name: '', picture: '' };
+      const { name = '', picture = '' } = person || {};
       return (
         <div className="recommendations-container">
           <InputForm user={user} onFetch={this.onFetch} />
-          <div className="user-container">
-            <img src={picture} alt={name} />
-            <h1>{name}</h1>
-          </div>
+          <UserContainer name={name} picture={picture} />
           <GraphContainer chartData={chartData} />
         </div>
       );
