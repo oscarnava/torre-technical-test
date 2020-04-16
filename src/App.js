@@ -2,11 +2,10 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { fetchUserRecs, fetchUserInfo } from './services/userInfo';
 import './styles/app.sass';
+import Globals from './globals';
 
-const randomByte = () => Math.floor(255 * Math.random());
-const randomColors = Array(100).fill(0).map(() => `rgba(${randomByte()},${randomByte()},${randomByte()},1.0)`);
-
-const generateColor = ({ dataIndex }) => randomColors[dataIndex];
+const { GRAPH_COLORS } = Globals;
+const generateColor = ({ dataIndex }) => GRAPH_COLORS[dataIndex];
 
 export default class App extends React.Component {
   constructor(props) {
@@ -44,7 +43,7 @@ export default class App extends React.Component {
                 User public id:
                 <input id="public-id" type="text" defaultValue={user} ref={this.inputReference} />
               </label>
-              <button type="submit" onClick={this.onFetch.bind(this)}>Fetch</button>
+              <button type="submit" onClick={this.onFetch}>Fetch</button>
             </form>
           </div>
           <div className="user-container">
@@ -54,7 +53,7 @@ export default class App extends React.Component {
           <div className="graph-container">
             <h2>Accumulated recommendations by weight</h2>
             <p>
-              This graph shows the user&apos;s strengths in a graph weighted by who did the recommendation
+              This graph shows the user&apos;s strengths in a graph weighted by who did the recommendation,
               and the weight of the person&apos;s recommendation. This way we can have a quick image of the
               best-recommended strengths of the user considering the total weight of them.
             </p>
