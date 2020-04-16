@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function InputForm(props) {
   const { user, inputReference, onFetch } = props;
@@ -14,3 +15,9 @@ export default function InputForm(props) {
     </div>
   );
 }
+
+InputForm.propTypes = {
+  user: PropTypes.string.isRequired,
+  inputReference: PropTypes.elementType.isRequired,
+  onFetch: PropTypes.func.isRequired,
+};
