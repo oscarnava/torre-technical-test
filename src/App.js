@@ -79,7 +79,7 @@ export default class App extends React.Component {
     }
 
     return (
-      <div className="loading-msg">Loading data...</div>
+      <div className="loading-msg">{`Loading data for user '${user}'. Please wait...`}</div>
     );
   }
 
