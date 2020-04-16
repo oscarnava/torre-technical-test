@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Doughnut } from 'react-chartjs-2';
 
 export default function GraphContainer({ chartData }) {
@@ -14,3 +15,7 @@ export default function GraphContainer({ chartData }) {
     </div>
   );
 }
+
+GraphContainer.propTypes = {
+  chartData: PropTypes.object.isRequired,
+};
