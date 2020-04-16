@@ -10,10 +10,12 @@ const acumRecs = ({ total, elements }, acum = { total: 0, count: 0, stats: {} })
   if (elements && elements[0] && elements[0].connections) {
     acum.total = total;
     return elements[0].connections.reduce((acc, itm) => {
-      acum.count += 1;
+      if (!itm.recommendation) return acc;
+
       const { weight, strengths } = itm.recommendation;
       // console.log({ source: itm.personSourceId, weight, strengths });
       strengths.forEach((strg) => { acc.stats[strg] = (acc.stats[strg] || 0) + weight; });
+      acum.count += 1;
       return acc;
     }, acum);
   }
