@@ -26,7 +26,6 @@ export default class App extends React.Component {
   onFetch = (e) => {
     e.preventDefault();
     const { value } = this.inputReference.current;
-    console.log({ value });
     this.setState({ user: value, chartData: null });
     this.fetchUser(value);
   }
@@ -86,7 +85,6 @@ export default class App extends React.Component {
 
   fetchUser(user) {
     fetchUserInfo(user).then(({ person }) => {
-      console.log({ person });
       if (person) {
         this.fetchRecs(person);
       } else {
@@ -98,8 +96,6 @@ export default class App extends React.Component {
   fetchRecs(person) {
     const { publicId } = person;
     fetchUserRecs(publicId).then(({ stats }) => {
-      console.log('componentDidMount', stats);
-
       const data = [];
       const labels = [];
       const keys = Object.keys(stats).sort((a, b) => stats[b] - stats[a]);
