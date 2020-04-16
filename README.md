@@ -55,11 +55,11 @@ For this issue, and to reduce requests to the server during development (and spe
   - Linkedin: [Oscar Nava Trujillo](https://www.linkedin.com/in/oscar-nava-trujillo-15847a14a/)
 
 ## ⌛ To-do's
-- [ ] The app fits in small screens, but I didn't put too much time on the responsive aspect, since this is just a _proof of concept_.
-- [ ] Since the recommendation API only sends back the recommendations in segments of 20, and in the spirit of _KISS_, I had to limit the result to 20 recommendations, but the ideal would be to being able to fetch the whole list in one go, because making several requests can be very costly.
+- [ ] The app fits in small screens, but I didn't put too much time on the responsive aspect since this is just a _proof of concept_.
+- [ ] Since the recommendation API only sends back the recommendations in segments of 20, and the spirit of _KISS_, I had to limit the result to 20 recommendations, but the ideal would be to being able to fetch the whole list in one go because making several requests can be very costly.
 
 ## 📦 Contributing
-Contributions, issues and feature requests are welcome!
+Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](https://github.com/oscarnava/events-page/issues).
 
